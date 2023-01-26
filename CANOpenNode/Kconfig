@@ -1,0 +1,26 @@
+#
+# For a description of the syntax of this configuration file,
+# see the file kconfig-language.txt in the NuttX tools repository.
+#
+
+menu "CANOpenNode"
+
+config CAN_OPEN_NODE
+	tristate "CAN Open Node"
+	default n
+	---help---
+		Enable the CAN Open Node example
+
+if CAN_OPEN_NODE
+
+config CAN_OPEN_NODE_PRIORITY
+	int "CAN Open Node task priority"
+	default 100
+
+config CAN_OPEN_NODE_STACKSIZE
+	int "CAN Open Node stack size"
+	default DEFAULT_TASK_STACKSIZE
+
+endif
+
+endmenu # CANOpenNode

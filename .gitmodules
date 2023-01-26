@@ -1,0 +1,4 @@
+[submodule "CANOpenNode/CANOpenGit"]
+	path = CANOpenNode/CANOpenGit
+	url = https://github.com/dvosahlik/CANopenNuttx
+	branch = master
