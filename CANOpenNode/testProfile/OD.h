@@ -11,19 +11,19 @@
 
     File info:
         File Names:   OD.h; OD.c
-        Project File: DSP302-NMTMaster.xml
+        Project File: project_dict_editpr.xdd
         File Version: 1
 
-        Created:      24.01.2023 15:16:15
-        Created By:   David
-        Modified:     24.01.2023 15:16:15
+        Created:      26.10.2022 12:06:36
+        Created By:   
+        Modified:     26.10.2022 13:13:25
         Modified By:  
 
     Device Info:
-        Vendor Name:  David
-        Vendor ID:    4567
-        Product Name: Test Nuttx
-        Product ID:   1234
+        Vendor Name:  
+        Vendor ID:    
+        Product Name: New Product
+        Product ID:   
 
         Description:  
 *******************************************************************************/
@@ -33,230 +33,91 @@
 /*******************************************************************************
     Counters of OD objects
 *******************************************************************************/
-#define OD_CNT_NMT 1
 #define OD_CNT_EM 1
-#define OD_CNT_SYNC 1
-#define OD_CNT_SYNC_PROD 1
-#define OD_CNT_STORAGE 1
-#define OD_CNT_TIME 1
-#define OD_CNT_EM_PROD 1
-#define OD_CNT_HB_CONS 1
 #define OD_CNT_HB_PROD 1
-#define OD_CNT_SDO_SRV 1
-#define OD_CNT_SDO_CLI 1
-#define OD_CNT_RPDO 4
-#define OD_CNT_TPDO 4
 
 
 /*******************************************************************************
     Sizes of OD arrays
 *******************************************************************************/
-#define OD_CNT_ARR_1003 16
-#define OD_CNT_ARR_1010 4
-#define OD_CNT_ARR_1011 4
-#define OD_CNT_ARR_1016 8
-#define OD_CNT_ARR_1F81 127
-#define OD_CNT_ARR_1F82 127
 
 
 /*******************************************************************************
     OD data declaration of all groups
 *******************************************************************************/
 typedef struct {
-    uint32_t x1000_deviceType;
-    uint32_t x1005_COB_ID_SYNCMessage;
-    uint32_t x1006_communicationCyclePeriod;
-    uint32_t x1007_synchronousWindowLength;
-    uint32_t x1012_COB_IDTimeStampObject;
-    uint32_t x1014_COB_ID_EMCY;
-    uint16_t x1015_inhibitTimeEMCY;
-    uint8_t x1016_consumerHeartbeatTime_sub0;
-    uint32_t x1016_consumerHeartbeatTime[OD_CNT_ARR_1016];
-    uint16_t x1017_producerHeartbeatTime;
-    struct {
-        uint8_t highestSub_indexSupported;
-        uint32_t vendor_ID;
-        uint32_t productCode;
-        uint32_t revisionNumber;
-        uint32_t serialNumber;
-    } x1018_identity;
-    uint8_t x1019_synchronousCounterOverflowValue;
-    struct {
-        uint8_t highestSub_indexSupported;
-        uint32_t COB_IDClientToServerTx;
-        uint32_t COB_IDServerToClientRx;
-        uint8_t node_IDOfTheSDOServer;
-    } x1280_SDOClientParameter;
-    struct {
-        uint8_t highestSub_indexSupported;
-        uint32_t COB_IDUsedByRPDO;
-        uint8_t transmissionType;
-        uint16_t eventTimer;
-    } x1400_RPDOCommunicationParameter;
-    struct {
-        uint8_t highestSub_indexSupported;
-        uint32_t COB_IDUsedByRPDO;
-        uint8_t transmissionType;
-        uint16_t eventTimer;
-    } x1401_RPDOCommunicationParameter;
-    struct {
-        uint8_t highestSub_indexSupported;
-        uint32_t COB_IDUsedByRPDO;
-        uint8_t transmissionType;
-        uint16_t eventTimer;
-    } x1402_RPDOCommunicationParameter;
-    struct {
-        uint8_t highestSub_indexSupported;
-        uint32_t COB_IDUsedByRPDO;
-        uint8_t transmissionType;
-        uint16_t eventTimer;
-    } x1403_RPDOCommunicationParameter;
-    struct {
-        uint8_t numberOfMappedApplicationObjectsInPDO;
-        uint32_t applicationObject1;
-        uint32_t applicationObject2;
-        uint32_t applicationObject3;
-        uint32_t applicationObject4;
-        uint32_t applicationObject5;
-        uint32_t applicationObject6;
-        uint32_t applicationObject7;
-        uint32_t applicationObject8;
-    } x1600_RPDOMappingParameter;
-    struct {
-        uint8_t numberOfMappedApplicationObjectsInPDO;
-        uint32_t applicationObject1;
-        uint32_t applicationObject2;
-        uint32_t applicationObject3;
-        uint32_t applicationObject4;
-        uint32_t applicationObject5;
-        uint32_t applicationObject6;
-        uint32_t applicationObject7;
-        uint32_t applicationObject8;
-    } x1601_RPDOMappingParameter;
-    struct {
-        uint8_t numberOfMappedApplicationObjectsInPDO;
-        uint32_t applicationObject1;
-        uint32_t applicationObject2;
-        uint32_t applicationObject3;
-        uint32_t applicationObject4;
-        uint32_t applicationObject5;
-        uint32_t applicationObject6;
-        uint32_t applicationObject7;
-        uint32_t applicationObject8;
-    } x1602_RPDOMappingParameter;
-    struct {
-        uint8_t numberOfMappedApplicationObjectsInPDO;
-        uint32_t applicationObject1;
-        uint32_t applicationObject2;
-        uint32_t applicationObject3;
-        uint32_t applicationObject4;
-        uint32_t applicationObject5;
-        uint32_t applicationObject6;
-        uint32_t applicationObject7;
-        uint32_t applicationObject8;
-    } x1603_RPDOMappingParameter;
-    struct {
-        uint8_t highestSub_indexSupported;
-        uint32_t COB_IDUsedByTPDO;
-        uint8_t transmissionType;
-        uint16_t inhibitTime;
-        uint16_t eventTimer;
-        uint8_t SYNCStartValue;
-    } x1800_TPDOCommunicationParameter;
-    struct {
-        uint8_t highestSub_indexSupported;
-        uint32_t COB_IDUsedByTPDO;
-        uint8_t transmissionType;
-        uint16_t inhibitTime;
-        uint16_t eventTimer;
-        uint8_t SYNCStartValue;
-    } x1801_TPDOCommunicationParameter;
-    struct {
-        uint8_t highestSub_indexSupported;
-        uint32_t COB_IDUsedByTPDO;
-        uint8_t transmissionType;
-        uint16_t inhibitTime;
-        uint16_t eventTimer;
-        uint8_t SYNCStartValue;
-    } x1802_TPDOCommunicationParameter;
-    struct {
-        uint8_t highestSub_indexSupported;
-        uint32_t COB_IDUsedByTPDO;
-        uint8_t transmissionType;
-        uint16_t inhibitTime;
-        uint16_t eventTimer;
-        uint8_t SYNCStartValue;
-    } x1803_TPDOCommunicationParameter;
-    struct {
-        uint8_t numberOfMappedApplicationObjectsInPDO;
-        uint32_t applicationObject1;
-        uint32_t applicationObject2;
-        uint32_t applicationObject3;
-        uint32_t applicationObject4;
-        uint32_t applicationObject5;
-        uint32_t applicationObject6;
-        uint32_t applicationObject7;
-        uint32_t applicationObject8;
-    } x1A00_TPDOMappingParameter;
-    struct {
-        uint8_t numberOfMappedApplicationObjectsInPDO;
-        uint32_t applicationObject1;
-        uint32_t applicationObject2;
-        uint32_t applicationObject3;
-        uint32_t applicationObject4;
-        uint32_t applicationObject5;
-        uint32_t applicationObject6;
-        uint32_t applicationObject7;
-        uint32_t applicationObject8;
-    } x1A01_TPDOMappingParameter;
-    struct {
-        uint8_t numberOfMappedApplicationObjectsInPDO;
-        uint32_t applicationObject1;
-        uint32_t applicationObject2;
-        uint32_t applicationObject3;
-        uint32_t applicationObject4;
-        uint32_t applicationObject5;
-        uint32_t applicationObject6;
-        uint32_t applicationObject7;
-        uint32_t applicationObject8;
-    } x1A02_TPDOMappingParameter;
-    struct {
-        uint8_t numberOfMappedApplicationObjectsInPDO;
-        uint32_t applicationObject1;
-        uint32_t applicationObject2;
-        uint32_t applicationObject3;
-        uint32_t applicationObject4;
-        uint32_t applicationObject5;
-        uint32_t applicationObject6;
-        uint32_t applicationObject7;
-        uint32_t applicationObject8;
-    } x1A03_TPDOMappingParameter;
-} OD_PERSIST_COMM_t;
-
-typedef struct {
     uint8_t x1001_errorRegister;
-    uint8_t x1010_storeParameters_sub0;
-    uint32_t x1010_storeParameters[OD_CNT_ARR_1010];
-    uint8_t x1011_restoreDefaultParameters_sub0;
-    uint32_t x1011_restoreDefaultParameters[OD_CNT_ARR_1011];
-    struct {
-        uint8_t highestSub_indexSupported;
-        uint32_t COB_IDClientToServerRx;
-        uint32_t COB_IDServerToClientTx;
-    } x1200_SDOServerParameter;
-    uint8_t x1F81_slaveAssignment_sub0;
-    uint8_t x1F82_requestNMT_sub0;
+    uint32_t x3001_setDeviceAddress;
+    uint32_t x3002_commandingMode;
+    float32_t x3003_currentLimit;
+    float32_t x3004_torqueReferenceIqIM;
+    uint32_t x3005_speedReference;
+    float32_t x3006_powerReference;
+    uint32_t x3007_motorsParametersIdentification;
+    uint32_t x3008_emergencyStop;
+    uint32_t x3009_outputPWM_FrequencySwitchingFrequency;
+    float32_t x300A_speedControllerKpGain;
+    float32_t x300B_speedControllerKiGain;
+    uint32_t x300C_motorsDirectionOfRotation;
+    float32_t x300D_motorsPhaseOrArmatureResistance;
+    float32_t x300E_motorsPhaseOrArmatureInductance;
+    uint32_t x300F_motorsNumberOfPoles;
+    uint32_t x3010_incrementalEncodersLines;
+    uint32_t x3011_speedLimit;
+    uint32_t x3013_feedbackControlMode;
+    uint32_t x3014_resetFactory;
+    uint32_t x3015_motorType;
+    uint32_t x3016_controlModeType;
+    float32_t x3017_currentControllerKpGainTorqueController;
+    float32_t x3018_currentControllerKiGainTorqueController;
+    float32_t x301A_magnetizingCurrentReferenceId;
+    int32_t x301B_positionReference;
+    float32_t x301C_positionControllerKpGain;
+    uint32_t x301D_positionControllerKiGain;
+    uint32_t x301F_resetPositionToZeroHome;
+    uint32_t x3020_deviceErrorRegister;
+    float32_t x3021_sensorlessObserverGainForNormalBLDC_PMSM_Motors;
+    float32_t x3022_sensorlessObserverGainForUltra_fastBLDC_PMSM_Motors;
+    float32_t x3023_sensorlessObserverGainForDC_BrushedMotors;
+    float32_t x3024_sensorlessObserverFilterGainForNormalBLDC_PMSM_Motors;
+    float32_t x3025_sensorlessObserverFilterGainForUltraFastBLDC_PMSM_Motors;
+    uint32_t x3026_UART_Baud_Rate;
+    uint32_t x3027_encoderOrHallSensorsCalibrationStartStop;
+    float32_t x3028_per_UnitEncoderOrHallSensorCounterClockwiseOffset;
+    float32_t x3029_per_UnitEncoderOrHallSensorClockwiseOffset;
+    float32_t x302A_speedAccelerationValue;
+    float32_t x302B_speedDecelerationValue;
+    uint32_t x302C_CAN_BusBaud_rat;
+    float32_t x302D_phase_AVoltage;
+    float32_t x302E_phase_BVoltage;
+    float32_t x302F_phase_A_Current;
+    float32_t x3030_phase_B_Current;
+    float32_t x3031_BUS_VoltageInputSupplyBattery;
+    float32_t x3032_DC_MotorCurrentIM;
+    float32_t x3033_DC_MotorVoltageVM;
+    float32_t x3034_quadratureCurrentIq;
+    float32_t x3035_directCurrentMagnetizingCurrentId;
+    int32_t x3036_speedFeedback;
+    int32_t x3037_positionFeedbackIncrementalEncoderAndHallSensors;
+    float32_t x3038_motorsAngle;
+    float32_t x3039_boardTemperature;
+    uint32_t x303C_analogueSpeedResolutionDivisionCoefficientASRDC;
+    uint32_t x303D_incrementalEncoderIndexCounts;
 } OD_RAM_t;
 
-#ifndef OD_ATTR_PERSIST_COMM
-#define OD_ATTR_PERSIST_COMM
-#endif
-extern OD_ATTR_PERSIST_COMM OD_PERSIST_COMM_t OD_PERSIST_COMM;
+typedef struct {
+    uint16_t x1017_producerHeartbeatTime;
+} OD_PERSIST_COMM_t;
 
 #ifndef OD_ATTR_RAM
 #define OD_ATTR_RAM
 #endif
 extern OD_ATTR_RAM OD_RAM_t OD_RAM;
+
+#ifndef OD_ATTR_PERSIST_COMM
+#define OD_ATTR_PERSIST_COMM
+#endif
+extern OD_ATTR_PERSIST_COMM OD_PERSIST_COMM_t OD_PERSIST_COMM;
 
 #ifndef OD_ATTR_OD
 #define OD_ATTR_OD
@@ -267,85 +128,131 @@ extern OD_ATTR_OD OD_t *OD;
 /*******************************************************************************
     Object dictionary entries - shortcuts
 *******************************************************************************/
-#define OD_ENTRY_H1000 &OD->list[0]
-#define OD_ENTRY_H1001 &OD->list[1]
-#define OD_ENTRY_H1003 &OD->list[2]
-#define OD_ENTRY_H1005 &OD->list[3]
-#define OD_ENTRY_H1006 &OD->list[4]
-#define OD_ENTRY_H1007 &OD->list[5]
-#define OD_ENTRY_H1010 &OD->list[6]
-#define OD_ENTRY_H1011 &OD->list[7]
-#define OD_ENTRY_H1012 &OD->list[8]
-#define OD_ENTRY_H1014 &OD->list[9]
-#define OD_ENTRY_H1015 &OD->list[10]
-#define OD_ENTRY_H1016 &OD->list[11]
-#define OD_ENTRY_H1017 &OD->list[12]
-#define OD_ENTRY_H1018 &OD->list[13]
-#define OD_ENTRY_H1019 &OD->list[14]
-#define OD_ENTRY_H1200 &OD->list[15]
-#define OD_ENTRY_H1280 &OD->list[16]
-#define OD_ENTRY_H1400 &OD->list[17]
-#define OD_ENTRY_H1401 &OD->list[18]
-#define OD_ENTRY_H1402 &OD->list[19]
-#define OD_ENTRY_H1403 &OD->list[20]
-#define OD_ENTRY_H1600 &OD->list[21]
-#define OD_ENTRY_H1601 &OD->list[22]
-#define OD_ENTRY_H1602 &OD->list[23]
-#define OD_ENTRY_H1603 &OD->list[24]
-#define OD_ENTRY_H1800 &OD->list[25]
-#define OD_ENTRY_H1801 &OD->list[26]
-#define OD_ENTRY_H1802 &OD->list[27]
-#define OD_ENTRY_H1803 &OD->list[28]
-#define OD_ENTRY_H1A00 &OD->list[29]
-#define OD_ENTRY_H1A01 &OD->list[30]
-#define OD_ENTRY_H1A02 &OD->list[31]
-#define OD_ENTRY_H1A03 &OD->list[32]
-#define OD_ENTRY_H1F80 &OD->list[33]
-#define OD_ENTRY_H1F81 &OD->list[34]
-#define OD_ENTRY_H1F82 &OD->list[35]
-#define OD_ENTRY_H1F89 &OD->list[36]
+#define OD_ENTRY_H1001 &OD->list[0]
+#define OD_ENTRY_H1017 &OD->list[1]
+#define OD_ENTRY_H3001 &OD->list[2]
+#define OD_ENTRY_H3002 &OD->list[3]
+#define OD_ENTRY_H3003 &OD->list[4]
+#define OD_ENTRY_H3004 &OD->list[5]
+#define OD_ENTRY_H3005 &OD->list[6]
+#define OD_ENTRY_H3006 &OD->list[7]
+#define OD_ENTRY_H3007 &OD->list[8]
+#define OD_ENTRY_H3008 &OD->list[9]
+#define OD_ENTRY_H3009 &OD->list[10]
+#define OD_ENTRY_H300A &OD->list[11]
+#define OD_ENTRY_H300B &OD->list[12]
+#define OD_ENTRY_H300C &OD->list[13]
+#define OD_ENTRY_H300D &OD->list[14]
+#define OD_ENTRY_H300E &OD->list[15]
+#define OD_ENTRY_H300F &OD->list[16]
+#define OD_ENTRY_H3010 &OD->list[17]
+#define OD_ENTRY_H3011 &OD->list[18]
+#define OD_ENTRY_H3013 &OD->list[19]
+#define OD_ENTRY_H3014 &OD->list[20]
+#define OD_ENTRY_H3015 &OD->list[21]
+#define OD_ENTRY_H3016 &OD->list[22]
+#define OD_ENTRY_H3017 &OD->list[23]
+#define OD_ENTRY_H3018 &OD->list[24]
+#define OD_ENTRY_H301A &OD->list[25]
+#define OD_ENTRY_H301B &OD->list[26]
+#define OD_ENTRY_H301C &OD->list[27]
+#define OD_ENTRY_H301D &OD->list[28]
+#define OD_ENTRY_H301F &OD->list[29]
+#define OD_ENTRY_H3020 &OD->list[30]
+#define OD_ENTRY_H3021 &OD->list[31]
+#define OD_ENTRY_H3022 &OD->list[32]
+#define OD_ENTRY_H3023 &OD->list[33]
+#define OD_ENTRY_H3024 &OD->list[34]
+#define OD_ENTRY_H3025 &OD->list[35]
+#define OD_ENTRY_H3026 &OD->list[36]
+#define OD_ENTRY_H3027 &OD->list[37]
+#define OD_ENTRY_H3028 &OD->list[38]
+#define OD_ENTRY_H3029 &OD->list[39]
+#define OD_ENTRY_H302A &OD->list[40]
+#define OD_ENTRY_H302B &OD->list[41]
+#define OD_ENTRY_H302C &OD->list[42]
+#define OD_ENTRY_H302D &OD->list[43]
+#define OD_ENTRY_H302E &OD->list[44]
+#define OD_ENTRY_H302F &OD->list[45]
+#define OD_ENTRY_H3030 &OD->list[46]
+#define OD_ENTRY_H3031 &OD->list[47]
+#define OD_ENTRY_H3032 &OD->list[48]
+#define OD_ENTRY_H3033 &OD->list[49]
+#define OD_ENTRY_H3034 &OD->list[50]
+#define OD_ENTRY_H3035 &OD->list[51]
+#define OD_ENTRY_H3036 &OD->list[52]
+#define OD_ENTRY_H3037 &OD->list[53]
+#define OD_ENTRY_H3038 &OD->list[54]
+#define OD_ENTRY_H3039 &OD->list[55]
+#define OD_ENTRY_H303A &OD->list[56]
+#define OD_ENTRY_H303B &OD->list[57]
+#define OD_ENTRY_H303C &OD->list[58]
+#define OD_ENTRY_H303D &OD->list[59]
 
 
 /*******************************************************************************
     Object dictionary entries - shortcuts with names
 *******************************************************************************/
-#define OD_ENTRY_H1000_deviceType &OD->list[0]
-#define OD_ENTRY_H1001_errorRegister &OD->list[1]
-#define OD_ENTRY_H1003_pre_definedErrorField &OD->list[2]
-#define OD_ENTRY_H1005_COB_ID_SYNCMessage &OD->list[3]
-#define OD_ENTRY_H1006_communicationCyclePeriod &OD->list[4]
-#define OD_ENTRY_H1007_synchronousWindowLength &OD->list[5]
-#define OD_ENTRY_H1010_storeParameters &OD->list[6]
-#define OD_ENTRY_H1011_restoreDefaultParameters &OD->list[7]
-#define OD_ENTRY_H1012_COB_IDTimeStampObject &OD->list[8]
-#define OD_ENTRY_H1014_COB_ID_EMCY &OD->list[9]
-#define OD_ENTRY_H1015_inhibitTimeEMCY &OD->list[10]
-#define OD_ENTRY_H1016_consumerHeartbeatTime &OD->list[11]
-#define OD_ENTRY_H1017_producerHeartbeatTime &OD->list[12]
-#define OD_ENTRY_H1018_identity &OD->list[13]
-#define OD_ENTRY_H1019_synchronousCounterOverflowValue &OD->list[14]
-#define OD_ENTRY_H1200_SDOServerParameter &OD->list[15]
-#define OD_ENTRY_H1280_SDOClientParameter &OD->list[16]
-#define OD_ENTRY_H1400_RPDOCommunicationParameter &OD->list[17]
-#define OD_ENTRY_H1401_RPDOCommunicationParameter &OD->list[18]
-#define OD_ENTRY_H1402_RPDOCommunicationParameter &OD->list[19]
-#define OD_ENTRY_H1403_RPDOCommunicationParameter &OD->list[20]
-#define OD_ENTRY_H1600_RPDOMappingParameter &OD->list[21]
-#define OD_ENTRY_H1601_RPDOMappingParameter &OD->list[22]
-#define OD_ENTRY_H1602_RPDOMappingParameter &OD->list[23]
-#define OD_ENTRY_H1603_RPDOMappingParameter &OD->list[24]
-#define OD_ENTRY_H1800_TPDOCommunicationParameter &OD->list[25]
-#define OD_ENTRY_H1801_TPDOCommunicationParameter &OD->list[26]
-#define OD_ENTRY_H1802_TPDOCommunicationParameter &OD->list[27]
-#define OD_ENTRY_H1803_TPDOCommunicationParameter &OD->list[28]
-#define OD_ENTRY_H1A00_TPDOMappingParameter &OD->list[29]
-#define OD_ENTRY_H1A01_TPDOMappingParameter &OD->list[30]
-#define OD_ENTRY_H1A02_TPDOMappingParameter &OD->list[31]
-#define OD_ENTRY_H1A03_TPDOMappingParameter &OD->list[32]
-#define OD_ENTRY_H1F80_NMTStartup &OD->list[33]
-#define OD_ENTRY_H1F81_slaveAssignment &OD->list[34]
-#define OD_ENTRY_H1F82_requestNMT &OD->list[35]
-#define OD_ENTRY_H1F89_bootTime &OD->list[36]
+#define OD_ENTRY_H1001_errorRegister &OD->list[0]
+#define OD_ENTRY_H1017_producerHeartbeatTime &OD->list[1]
+#define OD_ENTRY_H3001_setDeviceAddress &OD->list[2]
+#define OD_ENTRY_H3002_commandingMode &OD->list[3]
+#define OD_ENTRY_H3003_currentLimit &OD->list[4]
+#define OD_ENTRY_H3004_torqueReferenceIqIM &OD->list[5]
+#define OD_ENTRY_H3005_speedReference &OD->list[6]
+#define OD_ENTRY_H3006_powerReference &OD->list[7]
+#define OD_ENTRY_H3007_motorsParametersIdentification &OD->list[8]
+#define OD_ENTRY_H3008_emergencyStop &OD->list[9]
+#define OD_ENTRY_H3009_outputPWM_FrequencySwitchingFrequency &OD->list[10]
+#define OD_ENTRY_H300A_speedControllerKpGain &OD->list[11]
+#define OD_ENTRY_H300B_speedControllerKiGain &OD->list[12]
+#define OD_ENTRY_H300C_motorsDirectionOfRotation &OD->list[13]
+#define OD_ENTRY_H300D_motorsPhaseOrArmatureResistance &OD->list[14]
+#define OD_ENTRY_H300E_motorsPhaseOrArmatureInductance &OD->list[15]
+#define OD_ENTRY_H300F_motorsNumberOfPoles &OD->list[16]
+#define OD_ENTRY_H3010_incrementalEncodersLines &OD->list[17]
+#define OD_ENTRY_H3011_speedLimit &OD->list[18]
+#define OD_ENTRY_H3013_feedbackControlMode &OD->list[19]
+#define OD_ENTRY_H3014_resetFactory &OD->list[20]
+#define OD_ENTRY_H3015_motorType &OD->list[21]
+#define OD_ENTRY_H3016_controlModeType &OD->list[22]
+#define OD_ENTRY_H3017_currentControllerKpGainTorqueController &OD->list[23]
+#define OD_ENTRY_H3018_currentControllerKiGainTorqueController &OD->list[24]
+#define OD_ENTRY_H301A_magnetizingCurrentReferenceId &OD->list[25]
+#define OD_ENTRY_H301B_positionReference &OD->list[26]
+#define OD_ENTRY_H301C_positionControllerKpGain &OD->list[27]
+#define OD_ENTRY_H301D_positionControllerKiGain &OD->list[28]
+#define OD_ENTRY_H301F_resetPositionToZeroHome &OD->list[29]
+#define OD_ENTRY_H3020_deviceErrorRegister &OD->list[30]
+#define OD_ENTRY_H3021_sensorlessObserverGainForNormalBLDC_PMSM_Motors &OD->list[31]
+#define OD_ENTRY_H3022_sensorlessObserverGainForUltra_fastBLDC_PMSM_Motors &OD->list[32]
+#define OD_ENTRY_H3023_sensorlessObserverGainForDC_BrushedMotors &OD->list[33]
+#define OD_ENTRY_H3024_sensorlessObserverFilterGainForNormalBLDC_PMSM_Motors &OD->list[34]
+#define OD_ENTRY_H3025_sensorlessObserverFilterGainForUltraFastBLDC_PMSM_Motors &OD->list[35]
+#define OD_ENTRY_H3026_UART_Baud_Rate &OD->list[36]
+#define OD_ENTRY_H3027_encoderOrHallSensorsCalibrationStartStop &OD->list[37]
+#define OD_ENTRY_H3028_per_UnitEncoderOrHallSensorCounterClockwiseOffset &OD->list[38]
+#define OD_ENTRY_H3029_per_UnitEncoderOrHallSensorClockwiseOffset &OD->list[39]
+#define OD_ENTRY_H302A_speedAccelerationValue &OD->list[40]
+#define OD_ENTRY_H302B_speedDecelerationValue &OD->list[41]
+#define OD_ENTRY_H302C_CAN_BusBaud_rat &OD->list[42]
+#define OD_ENTRY_H302D_phase_AVoltage &OD->list[43]
+#define OD_ENTRY_H302E_phase_BVoltage &OD->list[44]
+#define OD_ENTRY_H302F_phase_A_Current &OD->list[45]
+#define OD_ENTRY_H3030_phase_B_Current &OD->list[46]
+#define OD_ENTRY_H3031_BUS_VoltageInputSupplyBattery &OD->list[47]
+#define OD_ENTRY_H3032_DC_MotorCurrentIM &OD->list[48]
+#define OD_ENTRY_H3033_DC_MotorVoltageVM &OD->list[49]
+#define OD_ENTRY_H3034_quadratureCurrentIq &OD->list[50]
+#define OD_ENTRY_H3035_directCurrentMagnetizingCurrentId &OD->list[51]
+#define OD_ENTRY_H3036_speedFeedback &OD->list[52]
+#define OD_ENTRY_H3037_positionFeedbackIncrementalEncoderAndHallSensors &OD->list[53]
+#define OD_ENTRY_H3038_motorsAngle &OD->list[54]
+#define OD_ENTRY_H3039_boardTemperature &OD->list[55]
+#define OD_ENTRY_H303A_firmwareVersion &OD->list[56]
+#define OD_ENTRY_H303B_hardwareVersion &OD->list[57]
+#define OD_ENTRY_H303C_analogueSpeedResolutionDivisionCoefficientASRDC &OD->list[58]
+#define OD_ENTRY_H303D_incrementalEncoderIndexCounts &OD->list[59]
 
 
 /*******************************************************************************
@@ -353,34 +260,34 @@ extern OD_ATTR_OD OD_t *OD;
 *******************************************************************************/
 #ifdef CO_MULTIPLE_OD
 #define OD_INIT_CONFIG(config) {\
-    (config).CNT_NMT = OD_CNT_NMT;\
+    (config).CNT_NMT = 0;\
     (config).ENTRY_H1017 = OD_ENTRY_H1017;\
-    (config).CNT_HB_CONS = OD_CNT_HB_CONS;\
-    (config).CNT_ARR_1016 = OD_CNT_ARR_1016;\
-    (config).ENTRY_H1016 = OD_ENTRY_H1016;\
+    (config).CNT_HB_CONS = 0;\
+    (config).CNT_ARR_1016 = 0;\
+    (config).ENTRY_H1016 = NULL;\
     (config).CNT_EM = OD_CNT_EM;\
     (config).ENTRY_H1001 = OD_ENTRY_H1001;\
-    (config).ENTRY_H1014 = OD_ENTRY_H1014;\
-    (config).ENTRY_H1015 = OD_ENTRY_H1015;\
-    (config).CNT_ARR_1003 = OD_CNT_ARR_1003;\
-    (config).ENTRY_H1003 = OD_ENTRY_H1003;\
-    (config).CNT_SDO_SRV = OD_CNT_SDO_SRV;\
-    (config).ENTRY_H1200 = OD_ENTRY_H1200;\
-    (config).CNT_SDO_CLI = OD_CNT_SDO_CLI;\
-    (config).ENTRY_H1280 = OD_ENTRY_H1280;\
-    (config).CNT_TIME = OD_CNT_TIME;\
-    (config).ENTRY_H1012 = OD_ENTRY_H1012;\
-    (config).CNT_SYNC = OD_CNT_SYNC;\
-    (config).ENTRY_H1005 = OD_ENTRY_H1005;\
-    (config).ENTRY_H1006 = OD_ENTRY_H1006;\
-    (config).ENTRY_H1007 = OD_ENTRY_H1007;\
-    (config).ENTRY_H1019 = OD_ENTRY_H1019;\
-    (config).CNT_RPDO = OD_CNT_RPDO;\
-    (config).ENTRY_H1400 = OD_ENTRY_H1400;\
-    (config).ENTRY_H1600 = OD_ENTRY_H1600;\
-    (config).CNT_TPDO = OD_CNT_TPDO;\
-    (config).ENTRY_H1800 = OD_ENTRY_H1800;\
-    (config).ENTRY_H1A00 = OD_ENTRY_H1A00;\
+    (config).ENTRY_H1014 = NULL;\
+    (config).ENTRY_H1015 = NULL;\
+    (config).CNT_ARR_1003 = 0;\
+    (config).ENTRY_H1003 = NULL;\
+    (config).CNT_SDO_SRV = 0;\
+    (config).ENTRY_H1200 = NULL;\
+    (config).CNT_SDO_CLI = 0;\
+    (config).ENTRY_H1280 = NULL;\
+    (config).CNT_TIME = 0;\
+    (config).ENTRY_H1012 = NULL;\
+    (config).CNT_SYNC = 0;\
+    (config).ENTRY_H1005 = NULL;\
+    (config).ENTRY_H1006 = NULL;\
+    (config).ENTRY_H1007 = NULL;\
+    (config).ENTRY_H1019 = NULL;\
+    (config).CNT_RPDO = 0;\
+    (config).ENTRY_H1400 = NULL;\
+    (config).ENTRY_H1600 = NULL;\
+    (config).CNT_TPDO = 0;\
+    (config).ENTRY_H1800 = NULL;\
+    (config).ENTRY_H1A00 = NULL;\
     (config).CNT_LEDS = 0;\
     (config).CNT_GFC = 0;\
     (config).ENTRY_H1300 = NULL;\
