@@ -16,14 +16,14 @@
 
         Created:      26.10.2022 12:06:36
         Created By:   
-        Modified:     26.10.2022 13:13:25
+        Modified:     02.02.2023 11:28:49
         Modified By:  
 
     Device Info:
-        Vendor Name:  
-        Vendor ID:    
-        Product Name: New Product
-        Product ID:   
+        Vendor Name:  SDS CTU
+        Vendor ID:    12345
+        Product Name: SDS Tiva
+        Product ID:   1234
 
         Description:  
 *******************************************************************************/
@@ -33,20 +33,73 @@
 /*******************************************************************************
     Counters of OD objects
 *******************************************************************************/
+#define OD_CNT_NMT 1
 #define OD_CNT_EM 1
+#define OD_CNT_SYNC 1
+#define OD_CNT_SYNC_PROD 1
+#define OD_CNT_STORAGE 1
+#define OD_CNT_TIME 1
+#define OD_CNT_EM_PROD 1
+#define OD_CNT_HB_CONS 1
 #define OD_CNT_HB_PROD 1
+#define OD_CNT_SDO_SRV 1
+#define OD_CNT_SDO_CLI 1
 
 
 /*******************************************************************************
     Sizes of OD arrays
 *******************************************************************************/
+#define OD_CNT_ARR_1003 16
+#define OD_CNT_ARR_1010 4
+#define OD_CNT_ARR_1011 4
+#define OD_CNT_ARR_1016 8
+#define OD_CNT_ARR_1F81 127
+#define OD_CNT_ARR_1F82 127
 
 
 /*******************************************************************************
     OD data declaration of all groups
 *******************************************************************************/
 typedef struct {
+    uint32_t x1000_deviceType;
+    uint32_t x1005_COB_ID_SYNCMessage;
+    uint32_t x1006_communicationCyclePeriod;
+    uint32_t x1007_synchronousWindowLength;
+    uint32_t x1012_COB_IDTimeStampObject;
+    uint32_t x1014_COB_ID_EMCY;
+    uint16_t x1015_inhibitTimeEMCY;
+    uint8_t x1016_consumerHeartbeatTime_sub0;
+    uint32_t x1016_consumerHeartbeatTime[OD_CNT_ARR_1016];
+    uint16_t x1017_producerHeartbeatTime;
+    struct {
+        uint8_t highestSub_indexSupported;
+        uint32_t vendor_ID;
+        uint32_t productCode;
+        uint32_t revisionNumber;
+        uint32_t serialNumber;
+    } x1018_identity;
+    uint8_t x1019_synchronousCounterOverflowValue;
+    struct {
+        uint8_t highestSub_indexSupported;
+        uint32_t COB_IDClientToServerTx;
+        uint32_t COB_IDServerToClientRx;
+        uint8_t node_IDOfTheSDOServer;
+    } x1280_SDOClientParameter;
+} OD_PERSIST_COMM_t;
+
+typedef struct {
     uint8_t x1001_errorRegister;
+    uint8_t x1010_storeParameters_sub0;
+    uint32_t x1010_storeParameters[OD_CNT_ARR_1010];
+    uint8_t x1011_restoreDefaultParameters_sub0;
+    uint32_t x1011_restoreDefaultParameters[OD_CNT_ARR_1011];
+    struct {
+        uint8_t highestSub_indexSupported;
+        uint32_t COB_IDClientToServerRx;
+        uint32_t COB_IDServerToClientTx;
+    } x1200_SDOServerParameter;
+    uint8_t x1F81_slaveAssignment_sub0;
+    uint8_t x1F82_requestNMT_sub0;
     uint32_t x3001_setDeviceAddress;
     uint32_t x3002_commandingMode;
     float32_t x3003_currentLimit;
@@ -105,19 +158,15 @@ typedef struct {
     uint32_t x303D_incrementalEncoderIndexCounts;
 } OD_RAM_t;
 
-typedef struct {
-    uint16_t x1017_producerHeartbeatTime;
-} OD_PERSIST_COMM_t;
+#ifndef OD_ATTR_PERSIST_COMM
+#define OD_ATTR_PERSIST_COMM
+#endif
+extern OD_ATTR_PERSIST_COMM OD_PERSIST_COMM_t OD_PERSIST_COMM;
 
 #ifndef OD_ATTR_RAM
 #define OD_ATTR_RAM
 #endif
 extern OD_ATTR_RAM OD_RAM_t OD_RAM;
-
-#ifndef OD_ATTR_PERSIST_COMM
-#define OD_ATTR_PERSIST_COMM
-#endif
-extern OD_ATTR_PERSIST_COMM OD_PERSIST_COMM_t OD_PERSIST_COMM;
 
 #ifndef OD_ATTR_OD
 #define OD_ATTR_OD
@@ -128,131 +177,169 @@ extern OD_ATTR_OD OD_t *OD;
 /*******************************************************************************
     Object dictionary entries - shortcuts
 *******************************************************************************/
-#define OD_ENTRY_H1001 &OD->list[0]
-#define OD_ENTRY_H1017 &OD->list[1]
-#define OD_ENTRY_H3001 &OD->list[2]
-#define OD_ENTRY_H3002 &OD->list[3]
-#define OD_ENTRY_H3003 &OD->list[4]
-#define OD_ENTRY_H3004 &OD->list[5]
-#define OD_ENTRY_H3005 &OD->list[6]
-#define OD_ENTRY_H3006 &OD->list[7]
-#define OD_ENTRY_H3007 &OD->list[8]
-#define OD_ENTRY_H3008 &OD->list[9]
-#define OD_ENTRY_H3009 &OD->list[10]
-#define OD_ENTRY_H300A &OD->list[11]
-#define OD_ENTRY_H300B &OD->list[12]
-#define OD_ENTRY_H300C &OD->list[13]
-#define OD_ENTRY_H300D &OD->list[14]
-#define OD_ENTRY_H300E &OD->list[15]
-#define OD_ENTRY_H300F &OD->list[16]
-#define OD_ENTRY_H3010 &OD->list[17]
-#define OD_ENTRY_H3011 &OD->list[18]
-#define OD_ENTRY_H3013 &OD->list[19]
-#define OD_ENTRY_H3014 &OD->list[20]
-#define OD_ENTRY_H3015 &OD->list[21]
-#define OD_ENTRY_H3016 &OD->list[22]
-#define OD_ENTRY_H3017 &OD->list[23]
-#define OD_ENTRY_H3018 &OD->list[24]
-#define OD_ENTRY_H301A &OD->list[25]
-#define OD_ENTRY_H301B &OD->list[26]
-#define OD_ENTRY_H301C &OD->list[27]
-#define OD_ENTRY_H301D &OD->list[28]
-#define OD_ENTRY_H301F &OD->list[29]
-#define OD_ENTRY_H3020 &OD->list[30]
-#define OD_ENTRY_H3021 &OD->list[31]
-#define OD_ENTRY_H3022 &OD->list[32]
-#define OD_ENTRY_H3023 &OD->list[33]
-#define OD_ENTRY_H3024 &OD->list[34]
-#define OD_ENTRY_H3025 &OD->list[35]
-#define OD_ENTRY_H3026 &OD->list[36]
-#define OD_ENTRY_H3027 &OD->list[37]
-#define OD_ENTRY_H3028 &OD->list[38]
-#define OD_ENTRY_H3029 &OD->list[39]
-#define OD_ENTRY_H302A &OD->list[40]
-#define OD_ENTRY_H302B &OD->list[41]
-#define OD_ENTRY_H302C &OD->list[42]
-#define OD_ENTRY_H302D &OD->list[43]
-#define OD_ENTRY_H302E &OD->list[44]
-#define OD_ENTRY_H302F &OD->list[45]
-#define OD_ENTRY_H3030 &OD->list[46]
-#define OD_ENTRY_H3031 &OD->list[47]
-#define OD_ENTRY_H3032 &OD->list[48]
-#define OD_ENTRY_H3033 &OD->list[49]
-#define OD_ENTRY_H3034 &OD->list[50]
-#define OD_ENTRY_H3035 &OD->list[51]
-#define OD_ENTRY_H3036 &OD->list[52]
-#define OD_ENTRY_H3037 &OD->list[53]
-#define OD_ENTRY_H3038 &OD->list[54]
-#define OD_ENTRY_H3039 &OD->list[55]
-#define OD_ENTRY_H303A &OD->list[56]
-#define OD_ENTRY_H303B &OD->list[57]
-#define OD_ENTRY_H303C &OD->list[58]
-#define OD_ENTRY_H303D &OD->list[59]
+#define OD_ENTRY_H1000 &OD->list[0]
+#define OD_ENTRY_H1001 &OD->list[1]
+#define OD_ENTRY_H1003 &OD->list[2]
+#define OD_ENTRY_H1005 &OD->list[3]
+#define OD_ENTRY_H1006 &OD->list[4]
+#define OD_ENTRY_H1007 &OD->list[5]
+#define OD_ENTRY_H1010 &OD->list[6]
+#define OD_ENTRY_H1011 &OD->list[7]
+#define OD_ENTRY_H1012 &OD->list[8]
+#define OD_ENTRY_H1014 &OD->list[9]
+#define OD_ENTRY_H1015 &OD->list[10]
+#define OD_ENTRY_H1016 &OD->list[11]
+#define OD_ENTRY_H1017 &OD->list[12]
+#define OD_ENTRY_H1018 &OD->list[13]
+#define OD_ENTRY_H1019 &OD->list[14]
+#define OD_ENTRY_H1200 &OD->list[15]
+#define OD_ENTRY_H1280 &OD->list[16]
+#define OD_ENTRY_H1F80 &OD->list[17]
+#define OD_ENTRY_H1F81 &OD->list[18]
+#define OD_ENTRY_H1F82 &OD->list[19]
+#define OD_ENTRY_H1F89 &OD->list[20]
+#define OD_ENTRY_H3001 &OD->list[21]
+#define OD_ENTRY_H3002 &OD->list[22]
+#define OD_ENTRY_H3003 &OD->list[23]
+#define OD_ENTRY_H3004 &OD->list[24]
+#define OD_ENTRY_H3005 &OD->list[25]
+#define OD_ENTRY_H3006 &OD->list[26]
+#define OD_ENTRY_H3007 &OD->list[27]
+#define OD_ENTRY_H3008 &OD->list[28]
+#define OD_ENTRY_H3009 &OD->list[29]
+#define OD_ENTRY_H300A &OD->list[30]
+#define OD_ENTRY_H300B &OD->list[31]
+#define OD_ENTRY_H300C &OD->list[32]
+#define OD_ENTRY_H300D &OD->list[33]
+#define OD_ENTRY_H300E &OD->list[34]
+#define OD_ENTRY_H300F &OD->list[35]
+#define OD_ENTRY_H3010 &OD->list[36]
+#define OD_ENTRY_H3011 &OD->list[37]
+#define OD_ENTRY_H3013 &OD->list[38]
+#define OD_ENTRY_H3014 &OD->list[39]
+#define OD_ENTRY_H3015 &OD->list[40]
+#define OD_ENTRY_H3016 &OD->list[41]
+#define OD_ENTRY_H3017 &OD->list[42]
+#define OD_ENTRY_H3018 &OD->list[43]
+#define OD_ENTRY_H301A &OD->list[44]
+#define OD_ENTRY_H301B &OD->list[45]
+#define OD_ENTRY_H301C &OD->list[46]
+#define OD_ENTRY_H301D &OD->list[47]
+#define OD_ENTRY_H301F &OD->list[48]
+#define OD_ENTRY_H3020 &OD->list[49]
+#define OD_ENTRY_H3021 &OD->list[50]
+#define OD_ENTRY_H3022 &OD->list[51]
+#define OD_ENTRY_H3023 &OD->list[52]
+#define OD_ENTRY_H3024 &OD->list[53]
+#define OD_ENTRY_H3025 &OD->list[54]
+#define OD_ENTRY_H3026 &OD->list[55]
+#define OD_ENTRY_H3027 &OD->list[56]
+#define OD_ENTRY_H3028 &OD->list[57]
+#define OD_ENTRY_H3029 &OD->list[58]
+#define OD_ENTRY_H302A &OD->list[59]
+#define OD_ENTRY_H302B &OD->list[60]
+#define OD_ENTRY_H302C &OD->list[61]
+#define OD_ENTRY_H302D &OD->list[62]
+#define OD_ENTRY_H302E &OD->list[63]
+#define OD_ENTRY_H302F &OD->list[64]
+#define OD_ENTRY_H3030 &OD->list[65]
+#define OD_ENTRY_H3031 &OD->list[66]
+#define OD_ENTRY_H3032 &OD->list[67]
+#define OD_ENTRY_H3033 &OD->list[68]
+#define OD_ENTRY_H3034 &OD->list[69]
+#define OD_ENTRY_H3035 &OD->list[70]
+#define OD_ENTRY_H3036 &OD->list[71]
+#define OD_ENTRY_H3037 &OD->list[72]
+#define OD_ENTRY_H3038 &OD->list[73]
+#define OD_ENTRY_H3039 &OD->list[74]
+#define OD_ENTRY_H303A &OD->list[75]
+#define OD_ENTRY_H303B &OD->list[76]
+#define OD_ENTRY_H303C &OD->list[77]
+#define OD_ENTRY_H303D &OD->list[78]
 
 
 /*******************************************************************************
     Object dictionary entries - shortcuts with names
 *******************************************************************************/
-#define OD_ENTRY_H1001_errorRegister &OD->list[0]
-#define OD_ENTRY_H1017_producerHeartbeatTime &OD->list[1]
-#define OD_ENTRY_H3001_setDeviceAddress &OD->list[2]
-#define OD_ENTRY_H3002_commandingMode &OD->list[3]
-#define OD_ENTRY_H3003_currentLimit &OD->list[4]
-#define OD_ENTRY_H3004_torqueReferenceIqIM &OD->list[5]
-#define OD_ENTRY_H3005_speedReference &OD->list[6]
-#define OD_ENTRY_H3006_powerReference &OD->list[7]
-#define OD_ENTRY_H3007_motorsParametersIdentification &OD->list[8]
-#define OD_ENTRY_H3008_emergencyStop &OD->list[9]
-#define OD_ENTRY_H3009_outputPWM_FrequencySwitchingFrequency &OD->list[10]
-#define OD_ENTRY_H300A_speedControllerKpGain &OD->list[11]
-#define OD_ENTRY_H300B_speedControllerKiGain &OD->list[12]
-#define OD_ENTRY_H300C_motorsDirectionOfRotation &OD->list[13]
-#define OD_ENTRY_H300D_motorsPhaseOrArmatureResistance &OD->list[14]
-#define OD_ENTRY_H300E_motorsPhaseOrArmatureInductance &OD->list[15]
-#define OD_ENTRY_H300F_motorsNumberOfPoles &OD->list[16]
-#define OD_ENTRY_H3010_incrementalEncodersLines &OD->list[17]
-#define OD_ENTRY_H3011_speedLimit &OD->list[18]
-#define OD_ENTRY_H3013_feedbackControlMode &OD->list[19]
-#define OD_ENTRY_H3014_resetFactory &OD->list[20]
-#define OD_ENTRY_H3015_motorType &OD->list[21]
-#define OD_ENTRY_H3016_controlModeType &OD->list[22]
-#define OD_ENTRY_H3017_currentControllerKpGainTorqueController &OD->list[23]
-#define OD_ENTRY_H3018_currentControllerKiGainTorqueController &OD->list[24]
-#define OD_ENTRY_H301A_magnetizingCurrentReferenceId &OD->list[25]
-#define OD_ENTRY_H301B_positionReference &OD->list[26]
-#define OD_ENTRY_H301C_positionControllerKpGain &OD->list[27]
-#define OD_ENTRY_H301D_positionControllerKiGain &OD->list[28]
-#define OD_ENTRY_H301F_resetPositionToZeroHome &OD->list[29]
-#define OD_ENTRY_H3020_deviceErrorRegister &OD->list[30]
-#define OD_ENTRY_H3021_sensorlessObserverGainForNormalBLDC_PMSM_Motors &OD->list[31]
-#define OD_ENTRY_H3022_sensorlessObserverGainForUltra_fastBLDC_PMSM_Motors &OD->list[32]
-#define OD_ENTRY_H3023_sensorlessObserverGainForDC_BrushedMotors &OD->list[33]
-#define OD_ENTRY_H3024_sensorlessObserverFilterGainForNormalBLDC_PMSM_Motors &OD->list[34]
-#define OD_ENTRY_H3025_sensorlessObserverFilterGainForUltraFastBLDC_PMSM_Motors &OD->list[35]
-#define OD_ENTRY_H3026_UART_Baud_Rate &OD->list[36]
-#define OD_ENTRY_H3027_encoderOrHallSensorsCalibrationStartStop &OD->list[37]
-#define OD_ENTRY_H3028_per_UnitEncoderOrHallSensorCounterClockwiseOffset &OD->list[38]
-#define OD_ENTRY_H3029_per_UnitEncoderOrHallSensorClockwiseOffset &OD->list[39]
-#define OD_ENTRY_H302A_speedAccelerationValue &OD->list[40]
-#define OD_ENTRY_H302B_speedDecelerationValue &OD->list[41]
-#define OD_ENTRY_H302C_CAN_BusBaud_rat &OD->list[42]
-#define OD_ENTRY_H302D_phase_AVoltage &OD->list[43]
-#define OD_ENTRY_H302E_phase_BVoltage &OD->list[44]
-#define OD_ENTRY_H302F_phase_A_Current &OD->list[45]
-#define OD_ENTRY_H3030_phase_B_Current &OD->list[46]
-#define OD_ENTRY_H3031_BUS_VoltageInputSupplyBattery &OD->list[47]
-#define OD_ENTRY_H3032_DC_MotorCurrentIM &OD->list[48]
-#define OD_ENTRY_H3033_DC_MotorVoltageVM &OD->list[49]
-#define OD_ENTRY_H3034_quadratureCurrentIq &OD->list[50]
-#define OD_ENTRY_H3035_directCurrentMagnetizingCurrentId &OD->list[51]
-#define OD_ENTRY_H3036_speedFeedback &OD->list[52]
-#define OD_ENTRY_H3037_positionFeedbackIncrementalEncoderAndHallSensors &OD->list[53]
-#define OD_ENTRY_H3038_motorsAngle &OD->list[54]
-#define OD_ENTRY_H3039_boardTemperature &OD->list[55]
-#define OD_ENTRY_H303A_firmwareVersion &OD->list[56]
-#define OD_ENTRY_H303B_hardwareVersion &OD->list[57]
-#define OD_ENTRY_H303C_analogueSpeedResolutionDivisionCoefficientASRDC &OD->list[58]
-#define OD_ENTRY_H303D_incrementalEncoderIndexCounts &OD->list[59]
+#define OD_ENTRY_H1000_deviceType &OD->list[0]
+#define OD_ENTRY_H1001_errorRegister &OD->list[1]
+#define OD_ENTRY_H1003_pre_definedErrorField &OD->list[2]
+#define OD_ENTRY_H1005_COB_ID_SYNCMessage &OD->list[3]
+#define OD_ENTRY_H1006_communicationCyclePeriod &OD->list[4]
+#define OD_ENTRY_H1007_synchronousWindowLength &OD->list[5]
+#define OD_ENTRY_H1010_storeParameters &OD->list[6]
+#define OD_ENTRY_H1011_restoreDefaultParameters &OD->list[7]
+#define OD_ENTRY_H1012_COB_IDTimeStampObject &OD->list[8]
+#define OD_ENTRY_H1014_COB_ID_EMCY &OD->list[9]
+#define OD_ENTRY_H1015_inhibitTimeEMCY &OD->list[10]
+#define OD_ENTRY_H1016_consumerHeartbeatTime &OD->list[11]
+#define OD_ENTRY_H1017_producerHeartbeatTime &OD->list[12]
+#define OD_ENTRY_H1018_identity &OD->list[13]
+#define OD_ENTRY_H1019_synchronousCounterOverflowValue &OD->list[14]
+#define OD_ENTRY_H1200_SDOServerParameter &OD->list[15]
+#define OD_ENTRY_H1280_SDOClientParameter &OD->list[16]
+#define OD_ENTRY_H1F80_NMTStartup &OD->list[17]
+#define OD_ENTRY_H1F81_slaveAssignment &OD->list[18]
+#define OD_ENTRY_H1F82_requestNMT &OD->list[19]
+#define OD_ENTRY_H1F89_bootTime &OD->list[20]
+#define OD_ENTRY_H3001_setDeviceAddress &OD->list[21]
+#define OD_ENTRY_H3002_commandingMode &OD->list[22]
+#define OD_ENTRY_H3003_currentLimit &OD->list[23]
+#define OD_ENTRY_H3004_torqueReferenceIqIM &OD->list[24]
+#define OD_ENTRY_H3005_speedReference &OD->list[25]
+#define OD_ENTRY_H3006_powerReference &OD->list[26]
+#define OD_ENTRY_H3007_motorsParametersIdentification &OD->list[27]
+#define OD_ENTRY_H3008_emergencyStop &OD->list[28]
+#define OD_ENTRY_H3009_outputPWM_FrequencySwitchingFrequency &OD->list[29]
+#define OD_ENTRY_H300A_speedControllerKpGain &OD->list[30]
+#define OD_ENTRY_H300B_speedControllerKiGain &OD->list[31]
+#define OD_ENTRY_H300C_motorsDirectionOfRotation &OD->list[32]
+#define OD_ENTRY_H300D_motorsPhaseOrArmatureResistance &OD->list[33]
+#define OD_ENTRY_H300E_motorsPhaseOrArmatureInductance &OD->list[34]
+#define OD_ENTRY_H300F_motorsNumberOfPoles &OD->list[35]
+#define OD_ENTRY_H3010_incrementalEncodersLines &OD->list[36]
+#define OD_ENTRY_H3011_speedLimit &OD->list[37]
+#define OD_ENTRY_H3013_feedbackControlMode &OD->list[38]
+#define OD_ENTRY_H3014_resetFactory &OD->list[39]
+#define OD_ENTRY_H3015_motorType &OD->list[40]
+#define OD_ENTRY_H3016_controlModeType &OD->list[41]
+#define OD_ENTRY_H3017_currentControllerKpGainTorqueController &OD->list[42]
+#define OD_ENTRY_H3018_currentControllerKiGainTorqueController &OD->list[43]
+#define OD_ENTRY_H301A_magnetizingCurrentReferenceId &OD->list[44]
+#define OD_ENTRY_H301B_positionReference &OD->list[45]
+#define OD_ENTRY_H301C_positionControllerKpGain &OD->list[46]
+#define OD_ENTRY_H301D_positionControllerKiGain &OD->list[47]
+#define OD_ENTRY_H301F_resetPositionToZeroHome &OD->list[48]
+#define OD_ENTRY_H3020_deviceErrorRegister &OD->list[49]
+#define OD_ENTRY_H3021_sensorlessObserverGainForNormalBLDC_PMSM_Motors &OD->list[50]
+#define OD_ENTRY_H3022_sensorlessObserverGainForUltra_fastBLDC_PMSM_Motors &OD->list[51]
+#define OD_ENTRY_H3023_sensorlessObserverGainForDC_BrushedMotors &OD->list[52]
+#define OD_ENTRY_H3024_sensorlessObserverFilterGainForNormalBLDC_PMSM_Motors &OD->list[53]
+#define OD_ENTRY_H3025_sensorlessObserverFilterGainForUltraFastBLDC_PMSM_Motors &OD->list[54]
+#define OD_ENTRY_H3026_UART_Baud_Rate &OD->list[55]
+#define OD_ENTRY_H3027_encoderOrHallSensorsCalibrationStartStop &OD->list[56]
+#define OD_ENTRY_H3028_per_UnitEncoderOrHallSensorCounterClockwiseOffset &OD->list[57]
+#define OD_ENTRY_H3029_per_UnitEncoderOrHallSensorClockwiseOffset &OD->list[58]
+#define OD_ENTRY_H302A_speedAccelerationValue &OD->list[59]
+#define OD_ENTRY_H302B_speedDecelerationValue &OD->list[60]
+#define OD_ENTRY_H302C_CAN_BusBaud_rat &OD->list[61]
+#define OD_ENTRY_H302D_phase_AVoltage &OD->list[62]
+#define OD_ENTRY_H302E_phase_BVoltage &OD->list[63]
+#define OD_ENTRY_H302F_phase_A_Current &OD->list[64]
+#define OD_ENTRY_H3030_phase_B_Current &OD->list[65]
+#define OD_ENTRY_H3031_BUS_VoltageInputSupplyBattery &OD->list[66]
+#define OD_ENTRY_H3032_DC_MotorCurrentIM &OD->list[67]
+#define OD_ENTRY_H3033_DC_MotorVoltageVM &OD->list[68]
+#define OD_ENTRY_H3034_quadratureCurrentIq &OD->list[69]
+#define OD_ENTRY_H3035_directCurrentMagnetizingCurrentId &OD->list[70]
+#define OD_ENTRY_H3036_speedFeedback &OD->list[71]
+#define OD_ENTRY_H3037_positionFeedbackIncrementalEncoderAndHallSensors &OD->list[72]
+#define OD_ENTRY_H3038_motorsAngle &OD->list[73]
+#define OD_ENTRY_H3039_boardTemperature &OD->list[74]
+#define OD_ENTRY_H303A_firmwareVersion &OD->list[75]
+#define OD_ENTRY_H303B_hardwareVersion &OD->list[76]
+#define OD_ENTRY_H303C_analogueSpeedResolutionDivisionCoefficientASRDC &OD->list[77]
+#define OD_ENTRY_H303D_incrementalEncoderIndexCounts &OD->list[78]
 
 
 /*******************************************************************************
@@ -260,28 +347,28 @@ extern OD_ATTR_OD OD_t *OD;
 *******************************************************************************/
 #ifdef CO_MULTIPLE_OD
 #define OD_INIT_CONFIG(config) {\
-    (config).CNT_NMT = 0;\
+    (config).CNT_NMT = OD_CNT_NMT;\
     (config).ENTRY_H1017 = OD_ENTRY_H1017;\
-    (config).CNT_HB_CONS = 0;\
-    (config).CNT_ARR_1016 = 0;\
-    (config).ENTRY_H1016 = NULL;\
+    (config).CNT_HB_CONS = OD_CNT_HB_CONS;\
+    (config).CNT_ARR_1016 = OD_CNT_ARR_1016;\
+    (config).ENTRY_H1016 = OD_ENTRY_H1016;\
     (config).CNT_EM = OD_CNT_EM;\
     (config).ENTRY_H1001 = OD_ENTRY_H1001;\
-    (config).ENTRY_H1014 = NULL;\
-    (config).ENTRY_H1015 = NULL;\
-    (config).CNT_ARR_1003 = 0;\
-    (config).ENTRY_H1003 = NULL;\
-    (config).CNT_SDO_SRV = 0;\
-    (config).ENTRY_H1200 = NULL;\
-    (config).CNT_SDO_CLI = 0;\
-    (config).ENTRY_H1280 = NULL;\
-    (config).CNT_TIME = 0;\
-    (config).ENTRY_H1012 = NULL;\
-    (config).CNT_SYNC = 0;\
-    (config).ENTRY_H1005 = NULL;\
-    (config).ENTRY_H1006 = NULL;\
-    (config).ENTRY_H1007 = NULL;\
-    (config).ENTRY_H1019 = NULL;\
+    (config).ENTRY_H1014 = OD_ENTRY_H1014;\
+    (config).ENTRY_H1015 = OD_ENTRY_H1015;\
+    (config).CNT_ARR_1003 = OD_CNT_ARR_1003;\
+    (config).ENTRY_H1003 = OD_ENTRY_H1003;\
+    (config).CNT_SDO_SRV = OD_CNT_SDO_SRV;\
+    (config).ENTRY_H1200 = OD_ENTRY_H1200;\
+    (config).CNT_SDO_CLI = OD_CNT_SDO_CLI;\
+    (config).ENTRY_H1280 = OD_ENTRY_H1280;\
+    (config).CNT_TIME = OD_CNT_TIME;\
+    (config).ENTRY_H1012 = OD_ENTRY_H1012;\
+    (config).CNT_SYNC = OD_CNT_SYNC;\
+    (config).ENTRY_H1005 = OD_ENTRY_H1005;\
+    (config).ENTRY_H1006 = OD_ENTRY_H1006;\
+    (config).ENTRY_H1007 = OD_ENTRY_H1007;\
+    (config).ENTRY_H1019 = OD_ENTRY_H1019;\
     (config).CNT_RPDO = 0;\
     (config).ENTRY_H1400 = NULL;\
     (config).ENTRY_H1600 = NULL;\
